@@ -4,4 +4,5 @@ import com.example.demo.player.entity.Player;
 
 public interface PlayerRepository {
     Player create();
+    Player createPlayer(String name);
 }

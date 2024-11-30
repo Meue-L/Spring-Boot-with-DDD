@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
@@ -20,5 +21,16 @@ public class PlayerController {
         log.info("createPlayer() called!");
 
         return playerService.createPlayer();
+    }
+
+    @GetMapping("/create")
+    public Player create(@RequestParam String name) {
+        log.info("create("+name+ ") called!");
+        if (name!=null) {
+            Player createdPlayer = playerService.create(name);
+            return createdPlayer;
+        } else {
+            return null;
+        }
     }
 }

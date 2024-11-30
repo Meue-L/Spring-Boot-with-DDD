@@ -14,4 +14,7 @@ public class PlayerServiceImpl implements PlayerService{
     public Player createPlayer() {
         return playerRepository.create();
     }
+
+    @Override
+    public Player create(String name) {return playerRepository.createPlayer(name);}
 }

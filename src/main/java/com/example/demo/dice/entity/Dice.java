@@ -9,4 +9,6 @@ public class Dice {
     public Dice(int number) {
         this.number = number;
     }
+
+    public int getValue() {return this.number;}
 }

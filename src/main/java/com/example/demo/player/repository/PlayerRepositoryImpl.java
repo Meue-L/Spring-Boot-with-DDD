@@ -22,4 +22,19 @@ public class PlayerRepositoryImpl implements PlayerRepository{
         playerList.add(player);
         return player;
     }
+
+    @Override
+    public Player createPlayer(String name) {
+        try {
+            // 중복 로직 구현하지 않음.
+            // 동일 닉네임은 계속해서 생성 가능함.
+
+            Player player = new Player(name);
+
+            playerList.add(player);
+            return player;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
