@@ -1,14 +1,24 @@
 package com.example.demo.dice.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Getter;
 
 @Getter
+@Entity
 public class Dice {
-    private int number;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public Dice(int number) {
+    private Long number;
+
+    public Dice(Long number) {
         this.number = number;
     }
 
-    public int getValue() {return this.number;}
+    public Dice() {
+    }
 }

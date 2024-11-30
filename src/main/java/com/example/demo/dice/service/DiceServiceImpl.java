@@ -10,22 +10,15 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class DiceServiceImpl implements DiceService{
+public class DiceServiceImpl implements DiceService {
     final private DiceRepository diceRepository;
 
     @Override
     public Dice rollDice() {
-        return diceRepository.rollDice();
-    }
+        long randomNumber = (long) Math.random() * 6 + 1;
+        Dice dice = new Dice(randomNumber);
+        Dice createdDice = diceRepository.save(dice);
 
-    @Override
-    public List<Dice> rollThreeDice() {
-        List<Dice> diceList= new ArrayList<>();
-
-        for (int i = 0; i<3; i++){
-            diceList.add(diceRepository.rollDice());
-        }
-
-        return diceList;
+        return createdDice;
     }
 }
