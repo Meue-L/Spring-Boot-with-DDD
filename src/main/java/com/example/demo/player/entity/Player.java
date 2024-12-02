@@ -1,4 +1,4 @@
-package com.example.demo.dice.entity;
+package com.example.demo.player.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,18 +8,18 @@ import lombok.Getter;
 
 @Getter
 @Entity
-public class Dice {
+public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
-    private Long number;
-    private Long playerId;
+    private String nickname;
 
-    public Dice(Long number) {
-        this.number = number;
+    public Player(String nickname) {
+        this.nickname = nickname;
     }
 
-    public Dice() {
+    public Player() {
+
     }
 }
