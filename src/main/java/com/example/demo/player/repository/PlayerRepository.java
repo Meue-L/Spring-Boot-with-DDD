@@ -1,8 +1,8 @@
 package com.example.demo.player.repository;
 
 import com.example.demo.player.entity.Player;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PlayerRepository {
-    Player create();
-    Player createPlayer(String name);
+public interface PlayerRepository extends JpaRepository<Player, Long> {
+
 }

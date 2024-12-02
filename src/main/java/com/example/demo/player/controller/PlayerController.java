@@ -1,36 +1,51 @@
 package com.example.demo.player.controller;
 
-import com.example.demo.player.entity.Player;
-import com.example.demo.player.service.PlayerService;
+import com.example.demo.player.controller.request_form.PlayerCreateRequestForm;
+import com.example.demo.player.controller.request_form.PlayerFindRequestForm;
+import com.example.demo.player.controller.response_form.PlayerCreateResponseForm;
+import com.example.demo.player.controller.response_form.PlayerListResponseForm;
+import com.example.demo.player.service.response.PlayerCreateResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.player.service.PlayerService;
+import com.example.demo.player.entity.Player;
+
+import java.util.List;
+
 @Slf4j
-@RestController
-@RequiredArgsConstructor
 @RequestMapping("/player")
+@RequiredArgsConstructor
+@RestController
 public class PlayerController {
     final private PlayerService playerService;
 
-    @GetMapping("/create-player")
-    public Player createPlayer() {
-        log.info("createPlayer() called!");
+    @GetMapping("/create")
+    public PlayerCreateResponseForm createPlayer(@ModelAttribute PlayerCreateRequestForm playerCreateRequestForm) {
+        log.info("createPlayer() called");
 
-        return playerService.createPlayer();
+        PlayerCreateResponse response = playerService.createPlayer(playerCreateRequestForm.toPlayerCreateRequest());
+
+        return PlayerCreateResponseForm.from(response);
     }
 
-    @GetMapping("/create")
-    public Player create(@RequestParam String name) {
-        log.info("create("+name+ ") called!");
-        if (name!=null) {
-            Player createdPlayer = playerService.create(name);
-            return createdPlayer;
-        } else {
-            return null;
-        }
+    @GetMapping("/find-player")
+    public Player findPlayer(@ModelAttribute PlayerFindRequestForm playerFindRequestForm) {
+        log.info("findPlayer() called!");
+
+        Player foundPlayer = playerService.findPlayer(playerFindRequestForm.toPlayerFindRequest());
+        return foundPlayer;
+    }
+
+    @GetMapping("/list")
+    public List<Player> listPlayer() {
+        log.info("listPlayer() called!");
+
+        List<Player> responseList = playerService.listPlayer();
+        return responseList;
     }
 }
