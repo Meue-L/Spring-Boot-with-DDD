@@ -7,10 +7,7 @@ import com.example.demo.player.controller.response_form.PlayerListResponseForm;
 import com.example.demo.player.service.response.PlayerCreateResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.player.service.PlayerService;
 import com.example.demo.player.entity.Player;
@@ -48,4 +45,5 @@ public class PlayerController {
         List<Player> responseList = playerService.listPlayer();
         return responseList;
     }
+
 }

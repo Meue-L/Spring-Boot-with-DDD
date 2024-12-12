@@ -1,5 +1,6 @@
 package com.example.demo.player.service;
 
+import com.example.demo.dice.entity.Dice;
 import com.example.demo.dice.repository.DiceRepository;
 import com.example.demo.player.entity.Player;
 import com.example.demo.player.repository.PlayerRepository;
@@ -45,6 +46,27 @@ public class PlayerServiceImpl implements PlayerService {
         List<Player> playerList = playerRepository.findAll();
 
         return playerList;
+    }
+
+    @Override
+    public Player findById(Long id) {
+        Optional<Player> maybePlayer = playerRepository.findById(id);
+
+        return maybePlayer.get();
+    }
+
+    @Override
+    public Player updateDiceList(Player player, List<Dice> diceList) {
+        // 해당 필드는 현재 @Transient를 통해서 DB에 직접적으로 연동되어 관리 되고 있지 않음
+        // player.updateDice(diceList);
+        // Player updatedPlayer = playerRepository.save(player);
+
+
+        // 메모리 단에서 관리하도록 수정.
+        player.getDiceList().clear();
+        player.getDiceList().addAll(diceList);
+
+        return player;
     }
 
 }

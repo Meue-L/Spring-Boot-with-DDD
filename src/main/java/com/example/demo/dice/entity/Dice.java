@@ -14,12 +14,16 @@ public class Dice {
     private Long id;
 
     private Long number;
-    private Long playerId;
+    private int playerId;
 
     public Dice(Long number) {
         this.number = number;
     }
 
     public Dice() {
+    }
+
+    public void savePlayerId(int number) {
+        playerId = number;
     }
 }
